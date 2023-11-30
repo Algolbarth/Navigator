@@ -10,6 +10,7 @@
             }
         }
         folder.links.push(System.edit);
+        System.change = true;
         System.pages.change("Menu");
     };
 </script>
@@ -17,7 +18,7 @@
 <div>
     <button on:click={() => {System.pages.change("LinkEdit")}}>Annuler</button>
     <br/>
-    <svelte:component this={Tree} {System} Stockage={System.folders[0]} {move} tab={0} />
+    <svelte:component this={Tree} {System} Stockage={System.folders[0]} Path={[]} {move} tab={0} />
 </div>
 
 <style>

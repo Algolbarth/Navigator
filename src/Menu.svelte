@@ -14,6 +14,8 @@
 
     function openFolder (folder) {
         System.currentFolder = folder;
+        sort(System.currentFolder.folders);
+        sort(System.currentFolder.links);
         System.path.push(folder);
         System.pages.change("Menu");
     }
@@ -21,8 +23,25 @@
     function returnFolder (index) {
         System.currentFolder = System.path[index];
         System.path.splice(index + 1, System.path.length - index);
+        sort(System.currentFolder.folders);
+        sort(System.currentFolder.links);
         System.pages.change("Menu");
     }
+
+    function sort (tab) {
+        for (let i=0;i<tab.length;i++) {
+            let j = i;
+            while (j > 0 && tab[j].name < tab[j-1].name) {
+                let swap = tab[j-1];
+                tab[j-1] = tab[j];
+                tab[j] = swap;
+                j--;
+            }
+        }
+    }
+
+    sort(System.currentFolder.folders);
+    sort(System.currentFolder.links);
 
     $:save_state = (System.change) ? 'validate' : '';
 </script>
@@ -31,6 +50,7 @@
 <br/><br/>
 <button on:click={() => {System.pages.change("FolderAdd")}}>Créer dossier</button>
 <button on:click={() => {System.pages.change("LinkAdd")}}>Créer raccourci</button>
+<button on:click={() => {System.pages.change("Map")}}>Carte</button>
 <button class={save_state} on:click={System.save}>Sauvegarder</button>
 <button class="cancel" on:click={() => {System.pages.change("Logout")}}>Déconnecter</button>
 <br/>
@@ -89,7 +109,8 @@
 <style>
     .container {
         display:grid;
-        grid-template-columns: 0.1fr 1fr 5fr;
+        width:100%;
+        grid-template-columns: 0.15fr 1fr 4fr;
         text-align:left;
     }
 
@@ -103,6 +124,7 @@
         margin:0;
         padding:0;
         font-weight: bold;
+        text-align:left;
     }
 
     .link:hover {
@@ -111,5 +133,9 @@
 
     img {
         width:1.5vw;
+    }
+
+    .name {
+        text-align:left;
     }
 </style>

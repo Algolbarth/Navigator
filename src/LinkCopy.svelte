@@ -5,6 +5,7 @@
     
     export function copy (link) {
         copyLink(System.edit, link);
+        System.change = true;
         System.pages.change("Menu");
     };
 
@@ -24,7 +25,7 @@
 <div>
     <button on:click={() => {System.pages.change("FolderEdit")}}>Annuler</button>
     <br/>
-    <svelte:component this={Tree} {System} Stockage={System.folders[0]} move={copy} tab={0} />
+    <svelte:component this={Tree} {System} Stockage={System.folders[0]} Path={[]} move={copy} tab={0} />
 </div>
 
 <style>

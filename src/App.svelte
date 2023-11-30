@@ -67,6 +67,9 @@
 	import Menu from "./Menu.svelte";
 	System.pages.add("Menu", Menu);
 
+	import Map from "./Map.svelte";
+	System.pages.add("Map", Map);
+
 	import Login from "./Login.svelte";
 	System.pages.add("Login", Login);
 
@@ -85,6 +88,9 @@
 	import LinkMove from "./LinkMove.svelte";
 	System.pages.add("LinkMove", LinkMove);
 
+	import LinkCopy from "./LinkCopy.svelte";
+	System.pages.add("LinkCopy", LinkCopy);
+
 	import FolderAdd from "./FolderAdd.svelte";
 	System.pages.add("FolderAdd", FolderAdd);
 
@@ -100,13 +106,21 @@
 	System.pages.change("Login");
 </script>
 
-<div id="root">
-    <svelte:component this={System.pages.actual.svelte} {System} />
+<div id="html">
+	<div id="body">
+		<svelte:component this={System.pages.actual.svelte} {System} />
+	</div>
 </div>
 
 <style>
-	#root {
+	#html {
+		width:100vw;
+		height:100vh;
+	}
+
+	#body {
 		text-align:center;
+		padding:1%;
 	}
 
 	:global(.validate) {
